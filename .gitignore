@@ -1,0 +1,11 @@
+# arquivos do IntelliJ
+.idea/
+
+# arquivos de módulo
+*.iml
+
+# arquivos compilados
+out/
+
+# classes compiladas
+*.class
