@@ -1,42 +1,26 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
         // Criando um objeto da classe Pessoa
-        Pessoa p1 = new Pessoa ();
-        p1.nome = " Maria ";
-        p1.idade = 18;
-        p1.sexo = 'F';
-        p1.cpf = "123.456.789-00";
 
+        Data d1 = new Data(10, 5, 2007);
+        Data d2 = new Data(20, 3, 2003);
 
-        //Criando outro objeto da classe Pessoa
-        Pessoa p2 = new Pessoa();
-        p2.nome = " João ";
-        p2.idade = 22;
-        p2.sexo = 'M';
-        p2.cpf = "234.567.890-00";
+        d1.imprimirData();
+        d2.imprimirData();
 
+        Pessoa p1 = new Pessoa ("Maria", d1, 'F', "123.456.789.00");
+        Pessoa p2 = new Pessoa("João", d2, 'M', "234.567.890-00");
 
-        //Criando um objeto da classe Conta
-        Conta c1 = new Conta();
-        c1.numero = " 1234-5 ";
-        c1.titular = p1;
-        c1.saldo = 100.0;
-        c1.limite = 200.0;
+        Data hoje = new Data(15, 3, 2026);
 
+        System.out.println("Idade da Maria: " + p1.retornaIdade(hoje));
+        System.out.println("Idade de João: " + p2.retornaIdade(hoje));
 
-        //Criando outro objeto da classe Conta
-        Conta c2 = new Conta();
-        c2.numero = " 2345-6 ";
-        c2.titular = p2;
-        c2.saldo = 150.0;
-        c2.limite = 200.0;
-
+        Conta c1 = new Conta(" 1234-5 ", p1);
+        Conta c2 = new Conta(" 2345-6 ", p2);
 
         c1.extrato();
         c2.extrato();
-
 
         c1.sacar(150);
         c1.transf(100, c2);
@@ -64,7 +48,10 @@ public class Main {
 
         for(int i = 1; i <= 120; i++) {
             c1.chequeEspecial(0.5);
-            System.out.println("Saldo após " + i + " dia(s): " + c1.saldo);
+
+            if(i%30 == 0) {
+                System.out.println("Saldo após " + i + " dia(s): " + c1.saldo);
+            }
         }
 
 

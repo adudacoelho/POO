@@ -3,6 +3,13 @@ public class Conta {
     Pessoa titular;
     double saldo, limite;
 
+    public Conta(String numero, Pessoa titular) {
+        this.numero = numero;
+        this.titular = titular;
+        this.saldo = 0;
+        this.limite = 200.0;
+        System.out.println("Nova conta adicionada ao sistema.");
+    }
 
     double disponivel(){
         return this.saldo + this.limite;
