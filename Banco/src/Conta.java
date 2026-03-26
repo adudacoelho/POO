@@ -2,12 +2,15 @@ public class Conta {
     String numero;
     Pessoa titular;
     double saldo, limite;
+    Data criacao;
+    Gerente ger;
 
-    public Conta(String numero, Pessoa titular) {
+    public Conta(String numero, Pessoa titular, Gerente ger, int dia, int mes, int ano) {
         this.numero = numero;
         this.titular = titular;
         this.saldo = 0;
-        this.limite = 200.0;
+        this.criacao = new Data(dia, mes, ano);
+        this.ger = ger;
         System.out.println("Nova conta adicionada ao sistema.");
     }
 
