@@ -1,37 +1,42 @@
+import java.util.Scanner;
+
 public class Pessoa {
-        String nome;
-        Data dtNasc;
+        String nome, cpf;
+        Data nasc;
         char sexo;
-        String cpf;
 
-        Pessoa(String nome, int dia, int mes, int ano, char sexo, String cpf){
-                this.nome = nome;
-                this.dtNasc = new Data(dia, mes, ano);
-                this.sexo = sexo;
-                this.cpf = cpf;
-        }
-        /* Métodos da classe Pessoa... */
+        Pessoa() {
+                Scanner s = new Scanner(System.in);
 
-        int idade(Data dataAtual){
-                int x = dataAtual.ano - this.dtNasc.ano;
+                s.nextLine();
 
-                if(dataAtual.mes < this.dtNasc.mes) return x - 1;
-                if(dataAtual.mes > this.dtNasc.mes) return x;
+                System.out.print("Nome: ");
+                this.nome = s.nextLine();
 
-                if(dataAtual.dia < this.dtNasc.dia) return x - 1;
-                return x;
+                System.out.print("CPF: ");
+                this.cpf = s.nextLine();
+
+                this.nasc = new Data();
+
+                System.out.print("Sexo: ");
+                this.sexo = s.nextLine().charAt(0);
         }
 
-        int retornaIdade(Data hoje){
-                int idade = hoje.ano - this.dtNasc.ano;
+        Pessoa(String n, Data d, char s, String c) {
+                this.nome = n;
+                this.nasc = d;
+                this.sexo = s;
+                this.cpf = c;
+        }
 
-                        if(hoje.mes < this.dtNasc.mes ||
-                                (hoje.mes == this.dtNasc.mes && hoje.dia < this.dtNasc.dia)){
-                                idade--;
-                        }
+        int idade(Data hoje) {
+                int idade = hoje.ano - this.nasc.ano;
 
-                        return idade;
+                if (hoje.mes < this.nasc.mes ||
+                        (hoje.mes == this.nasc.mes && hoje.dia < this.nasc.dia)) {
+                        idade--;
                 }
 
-
+                return idade;
         }
+}

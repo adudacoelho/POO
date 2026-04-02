@@ -1,14 +1,35 @@
-public class Gerente  extends Pessoa {
+import java.util.Scanner;
+
+public class Gerente extends Pessoa {
     String matricula;
     String senha;
 
-    Gerente(String nome, int dia, int mes, int ano, char sexo, String cpf, String matricula, String senha){
-        super(nome, dia, mes, ano, sexo, cpf);
-        this.matricula = matricula;
-        this.senha = senha;
+    Gerente() {
+        super();
+        Scanner s = new Scanner(System.in);
+
+        System.out.print("Matrícula: ");
+        this.matricula = s.nextLine();
+
+        this.senha = "123456"; // padrão
     }
 
-    boolean validarAcesso(String senha) {
-        return (this.senha.equals(senha));
+    Gerente(String n, Data d, char s, String c, String m, String p) {
+        super(n, d, s, c);
+        this.matricula = m;
+        this.senha = p;
+    }
+
+    boolean validarAcesso(String pwd) {
+        return pwd.equals(this.senha);
+    }
+
+    boolean validarAcesso() {
+        Scanner s = new Scanner(System.in);
+
+        System.out.print("Digite a senha: ");
+        String pwd = s.nextLine();
+
+        return validarAcesso(pwd);
     }
 }

@@ -1,9 +1,15 @@
-public class Poupanca extends Conta{
-    Poupanca(String numero, Pessoa titular, Gerente ger, int dia, int mes, int ano){
-        super(numero, titular, ger, dia, mes, ano);
+public class Poupanca extends Conta {
+
+    Poupanca(String n, Pessoa t, Data d, Gerente g) {
+        super(n, t, d, g);
     }
 
-    void rendimentos(double juro){
-        this.saldo += (this.saldo * juro / 100);
+    void extrato() {
+        System.out.println("\n*** EXTRATO DE POUPANCA ***");
+        super.extrato();
+    }
+
+    void rendimentos(double juro) {
+        this.saldo += (juro * this.saldo) / 100;
     }
 }

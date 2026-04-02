@@ -1,77 +1,60 @@
 public class Conta {
     String numero;
     Pessoa titular;
-    double saldo, limite;
-    Data criacao;
     Gerente ger;
+    double saldo;
+    Data criacao;
 
-    public Conta(String numero, Pessoa titular, Gerente ger, int dia, int mes, int ano) {
-        this.numero = numero;
-        this.titular = titular;
+    // Construtor com parâmetros
+    Conta(String n, Pessoa t, Data d, Gerente g) {
+        this.numero = n;
+        this.titular = t;
+        this.criacao = d;
+        this.ger = g;
         this.saldo = 0;
-        this.criacao = new Data(dia, mes, ano);
-        this.ger = ger;
-        System.out.println("Nova conta adicionada ao sistema.");
     }
 
-    double disponivel(){
-        return this.saldo + this.limite;
+    // Construtor com entrada de dados
+    Conta(Gerente g) {
+        this.ger = g;
+        java.util.Scanner s = new java.util.Scanner(System.in);
+
+        System.out.print("Número da conta: ");
+        this.numero = s.nextLine();
+
+        System.out.println("Dados do titular:");
+        this.titular = new Pessoa();
+
+        this.criacao = new Data();
+        this.saldo = 0;
     }
 
-
-    void extrato(){
-        System.out.println("\nEXTRATO DA CONTA \n");
-        System.out.println("Número:" + this.numero);
-        System.out.println("Titular:" + this.titular.cpf);
-        System.out.println("Disponível: R$" + this.disponivel() + "\n");
+    double disponivel() {
+        return this.saldo;
     }
 
-
-    void depositar(double v){
-        this.saldo += v;
-        System.out.println("Depósito realizado com sucesso!" + "\n");
+    void extrato() {
+        System.out.println("Titular: " + this.titular.nome + " (CPF: " + this.titular.cpf + ")");
+        System.out.println("Número da Conta: " + this.numero);
+        System.out.println("Saldo disponível para saque: R$ " + this.disponivel());
+    }
+    void depositar(double valor) {
+        this.saldo += valor;
     }
 
-
-    boolean sacar(double v){
-        if (this.disponivel() >= v){
-            this.saldo -= v;
-            System.out.println("Saque realizado com sucesso na conta " + this.numero + "Novo saldo: " + this.saldo + "\n");
-            return true;
-
-
-        }
-        else{
-            System.out.println("ERRO: Saque na conta " + this.numero + " não foi realizado. Valor disponível: " + this.disponivel() + "\n");
-            return false;
-        }
-    }
-
-
-    boolean transf (double v, Conta dest){
-        if(this.sacar(v)){
-            dest.depositar(v);
-            System.out.println("Transferência de " + v + " da conta " + this.numero + " para a conta " + dest.numero + " foi realizado com sucesso." + "\n");
+    boolean sacar(double valor) {
+        if (this.disponivel() >= valor) {
+            this.saldo -= valor;
             return true;
         }
-        else {
-            System.out.println("ERRO: Não foi possível transferir " + v + " da conta " + this.numero + " para a conta " + dest.numero + ".  Valor disponível: " + this.disponivel() + "\n");
-            return false;
-
-
-        }
+        return false;
     }
 
-
-    void chequeEspecial(double juro){
-        if (this.saldo < 0){
-            this.saldo = this.saldo + (this.saldo * (juro/100));
-
-
+    boolean transferir(double valor, Conta destino) {
+        if (this.sacar(valor)) {
+            destino.depositar(valor);
+            return true;
         }
+        return false;
     }
-
-
 }
-
-
